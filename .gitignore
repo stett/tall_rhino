@@ -1,0 +1,25 @@
+# Compiled Source #
+###################
+*.pyc
+
+# Environment #
+###############
+/env/
+local.sh
+
+# Compiled Staticfiles #
+########################
+/static/
+/media/
+
+# Local/secret Django environment settings #
+############################################
+secret.py
+
+# Transient log files #
+#######################
+/log/
+
+# HTAccess user/password definitions #
+######################################
+*.htpasswd

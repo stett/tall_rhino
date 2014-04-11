@@ -1,0 +1,149 @@
+@import url('../lib/lesshat.less');
+
+/*
+ * Variables
+ */
+
+// Colors
+@text_color: #444;
+@accent: #69f;
+@main_bg: rgb(200, 200, 200);
+@content_bg: rgb(240, 240, 240);
+
+// Fonts
+@main_font: 'Ubuntu', sans-serif;
+@title_font: 'Lily Script One', cursive;
+
+// Box Shadows
+@shadow: 0 0 4px -2px black;
+
+// Dimensions
+@content_width: 640px;
+@container_width: 600px;
+@header_height: 128px;
+
+// Mixins
+.trans { .transition(.2s, ease-out); }
+.shadow { .box-shadow(0 0 4px -2px black); }
+
+
+/*
+ * Structure
+ */
+
+html {
+    height: 100%;
+    background-color: @main_bg;
+}
+
+body {
+    min-height: 90%;
+    max-width: @content_width;
+    margin: 0 auto;
+    font-family: @main_font;
+    color: @text_color;
+    background-color: @content_bg;
+    border: 1px solid @accent;
+    border-top: none;
+    .shadow;
+}
+
+#content {
+    padding: 5px;
+}
+
+#logo {
+    height: 180px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px 20px 0 60px;
+}
+
+#nav {
+    display: inline-block;
+}
+
+#title {
+    margin-top: 20px;
+    vertical-align: top;
+    display: inline-block;
+    font-family: 'Lily Script One', cursive;
+
+    #tall {
+        font-size: 35px;
+        margin-bottom: -20px;
+        @media screen and (max-width: @content_width) { font-size: 30px; }
+    }
+
+    #rhinoceros {
+        font-size: 75px;
+        @media screen and (max-width: @content_width) { font-size: 55px; }
+        @media screen and (max-width: 510px) { display: none; }
+    }
+
+    #rhino {
+        font-size: 55px;
+        display: none;
+        @media screen and (max-width: 510px) { display: block; }
+        @media screen and (max-width: 350px) { font-size: 40px; }
+    }
+}
+
+#nav ul {
+    padding: 0;
+    margin: 0;
+    li { list-style-type: none; }
+    li a {
+        display: block;
+        color: darken(@main_bg, 20%);
+        font-size: 12px;
+        text-transform: uppercase;
+        &:hover { color: @accent; }
+    }
+}
+
+a {
+    color: @accent;
+    text-decoration: none;
+    .trans;
+    &:hover { color: lighten(@accent, 10%); }
+}
+
+em {
+    font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Loading spinner
+ */
+
+
+@keyframes anim_spin {
+    to { transform: rotate(1turn); }
+}
+
+.load {
+    width: 32px;
+    height: 32px;
+    background-image: url('/static/img/load.png');
+
+    //animation: anim_spin 1s infinite;
+    -webkit-animation: spin .5s infinite linear;
+    @-webkit-keyframes spin {
+        0%   {-webkit-transform: rotate(0deg)}
+        100% {-webkit-transform: rotate(360deg)}
+    }
+
+    //animation-duration .5s;
+    //animation-name: rotate;
+    //animation-iteration-count: infinite;
+    //.animation(anim_spin .5s linear infinite);
+    //.keyframes(~'anim_spin, 0%{ transform: rotate(0); }, 100%{ transform: rotate(360); }');
+    //.keyframes(~'anim_spin, 0%{ transform: scale(1.5); color: blue; } 100%{ transform: scale(2); color: red }');
+
+}

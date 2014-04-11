@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load imageset %}
+{% load staticfiles %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'js/imageset.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% for post in posts %}
+<div>
+    <h2>{{ post.title }}</h2>
+    <small>{{ post.date }}</small>
+    {% imageset post %}
+</div>
+{% endfor %}
+{% endblock %}
