@@ -1,10 +1,17 @@
-<div class="imageset" data-id="{{ post.id }}">
-    <a class="image" href="#">
-        <span class="load center"></span>
-    </a>
-    {% for image in post.images.all %}
-    <div class="thumb">
-    {{ image.image.url }}
+{% load staticfiles %}
+{% load thumbnail %}
+
+<div class="imageset">
+    <div class="image">
+        <img />
+        <span class="load"></span>
     </div>
-    {% endfor %}
+    <img class="buffer" />
+    <div class="thumbs">
+        {% for image in images %}
+        {% thumbnail image.image '48x48' crop='center' as thumb %}
+        <img class="thumb" href="/media/{{ image.image }}" src="/media/{{ thumb }}"/>
+        {% endthumbnail %}
+        {% endfor %}
+    </div>
 </div>

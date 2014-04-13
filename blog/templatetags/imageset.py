@@ -1,16 +1,14 @@
 from django import template
-#from blog.models import *
 
 register = template.Library()
 
 class ImageSetNode(template.Node):
-    def __init__(self, post):
-        self.post = post
+    def __init__(self, images):
+        self.images = images
     def render(self, context):
         t = template.loader.get_template("imageset.html")
-        return t.render(template.Context({"post": self.post}, autoescape=context.autoescape))
+        return t.render(template.Context({"images": self.images}, autoescape=context.autoescape))
 
-@register.tag(name="imageset")
-def imageset(parser, token):
-    tag_name, post = token.split_contents()
-    return ImageSetNode(post)
+@register.simple_tag
+def imageset(images):
+    return ImageSetNode(images)

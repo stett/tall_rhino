@@ -3,6 +3,14 @@
 {% load staticfiles %}
 {% load compress %}
 
+{# JS #}
+{% compress js %}
+<script type="text/javascript" src="{% static 'lib/jquery.js' %}"></script>
+{#<script type="text/javascript" src="{% static 'lib/knockout.js' %}"></script>#}
+{% endcompress %}
+{% block js %}
+{% endblock %}
+
 <html>
 <head>
     {# Meta #}
@@ -48,12 +56,4 @@
 <link rel="stylesheet" type="text/less" href="{% static 'less/base.less' %}">
 {% endcompress %}
 {% block style %}
-{% endblock %}
-
-{# JS #}
-{% compress js %}
-<script type="text/javascript" src="{% static 'lib/jquery.js' %}"></script>
-{#<script type="text/javascript" src="{% static 'lib/knockout.js' %}"></script>#}
-{% endcompress %}
-{% block js %}
 {% endblock %}

@@ -8,10 +8,13 @@
 
 {% block content %}
 {% for post in posts %}
-<div>
-    <h2>{{ post.title }}</h2>
+<div class="post">
+    <a href="#"><h2>{{ post.title }}</h2></a>
     <small>{{ post.date }}</small>
-    {% imageset post %}
+    <div class="content">
+        {{ post.content }}
+        {% imageset post.images.all %}
+    </div>
 </div>
 {% endfor %}
 {% endblock %}

@@ -8,14 +8,16 @@
 @text_color: #444;
 @accent: #69f;
 @main_bg: rgb(200, 200, 200);
+//@main_bg: darken(@accent, 10%);
 @content_bg: rgb(240, 240, 240);
+@middle_gray: rgb(127, 127, 127);
 
 // Fonts
 @main_font: 'Ubuntu', sans-serif;
 @title_font: 'Lily Script One', cursive;
 
 // Box Shadows
-@shadow: 0 0 4px -2px black;
+@shadow: 0 0 6px -2px black;
 
 // Dimensions
 @content_width: 640px;
@@ -23,7 +25,6 @@
 @header_height: 128px;
 
 // Mixins
-.trans { .transition(.2s, ease-out); }
 .shadow { .box-shadow(0 0 4px -2px black); }
 
 
@@ -40,6 +41,7 @@ body {
     min-height: 90%;
     max-width: @content_width;
     margin: 0 auto;
+    margin-bottom: 32px;
     font-family: @main_font;
     color: @text_color;
     background-color: @content_bg;
@@ -105,7 +107,7 @@ body {
 a {
     color: @accent;
     text-decoration: none;
-    .trans;
+    transition: color .2s;
     &:hover { color: lighten(@accent, 10%); }
 }
 
@@ -118,6 +120,94 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
+
+/*
+ * Post
+ */
+
+.post {
+    h2 {
+        font-size: 13pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: 50%;
+    }
+    small {
+        color: darken(@main_bg, 25%);
+    }
+    .content {
+        padding: 10px 0;
+    }
+}
+
+
+/*
+ * Image set
+ */
+
+.imageset {
+    position: relative;
+    margin-top: 10px;
+
+    .image {
+        margin: 0 auto;
+        display: block;
+        width: 256px;
+        height: 256px;
+        position: relative;
+        z-index: 2;
+        border: 1px solid @accent;
+        background: @content_bg;
+        .shadow;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        img {
+            position: absolute;
+        }
+    }
+
+    .buffer {
+        display: none;
+        max-width: 100%;
+        max-height: @content_width;
+    }
+
+    .load {
+        z-index: 4;
+        margin: 32px auto;
+    }
+}
+.thumbs {
+    text-align: center;
+    height: 64px;
+}
+.thumb {
+    vertical-align: top;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 1px solid @accent;
+    .shadow;
+    position: relative;
+    z-index: 1;
+    transition: margin-top .2s;
+
+    margin-top: -8px;
+
+    &:hover {
+        margin-top: -1px;
+        cursor: pointer;
+    }
+
+    &.active {
+        margin-top: -3px;
+        z-index: 3;
+    }
+}
+
 /*
  * Loading spinner
  */
@@ -128,22 +218,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .load {
+    display: block;
     width: 32px;
     height: 32px;
     background-image: url('/static/img/load.png');
 
-    //animation: anim_spin 1s infinite;
-    -webkit-animation: spin .5s infinite linear;
+    -webkit-animation: spin .4s infinite linear;
     @-webkit-keyframes spin {
         0%   {-webkit-transform: rotate(0deg)}
         100% {-webkit-transform: rotate(360deg)}
     }
-
-    //animation-duration .5s;
-    //animation-name: rotate;
-    //animation-iteration-count: infinite;
-    //.animation(anim_spin .5s linear infinite);
-    //.keyframes(~'anim_spin, 0%{ transform: rotate(0); }, 100%{ transform: rotate(360); }');
-    //.keyframes(~'anim_spin, 0%{ transform: scale(1.5); color: blue; } 100%{ transform: scale(2); color: red }');
-
 }

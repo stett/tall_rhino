@@ -1,37 +1,49 @@
 $(function() {
-    var accent = '#69f';
+    //$(".load img").attr("src", "/static/img/load.png");
 
-    $('.imageset .image').css({
-        'position': 'relative',
-        'margin': '0 auto',
-        'display': 'block',
-        'min-width': '128px',
-        'min-height': '128px',
-        'border': '1px solid ' + accent,
+    $(".imageset .buffer").load(function() {
+        var $buffer = $(this);
+        var src = $buffer.attr('src');
+        var width = $buffer.width() - 2;
+        var height = $buffer.height() - 2;
+        var $parent = $buffer.parent();
+        var $loader = $parent.find(".load");
+        var $image = $parent.find(".image");
+        var $img = $image.find('img');
+        $loader.fadeOut(200);
+        $image.animate({
+            'width': width,
+            'height': height,
+        }, 300, function() {
+            $img.width(width);
+            $img.height(height);
+            $img.attr("src", src);
+            $img.animate({ 'opacity': 1 }, 200);
+        });
     });
 
-    function recenter($centerable) {
-        console.log($centerable);
-        var $container = $centerable.parent();
-        $centerable.css({
-            'display': 'block',
-            'position': 'absolute',
-            'margin': '0',
+    $(".imageset .thumbs .thumb").click(function() {
+        var $thumb = $(this);
+        if ($thumb.hasClass("active")) return;
+        var src = $thumb.attr("href");
+        var $parent = $thumb.closest('.imageset');
+        var $loader = $parent.find(".load");
+        var $buffer = $parent.find(".buffer");
+        var $img = $parent.find(".image img");
+        $parent.find('.thumb').removeClass('active');
+        $thumb.addClass('active');
+        $loader.fadeIn(200);
+        $img.animate({ 'opacity': 0}, 200, function() {
+            $buffer.attr("src", src);
         });
-        var left = ($container.width() - $centerable.width()) / 2;
-        var top = ($container.height() - $centerable.height()) / 2;
-        $centerable.css({
-            'left': String(left) + 'px',
-            'top': String(top) + 'px',
-        });
-    };
+    });
 
-    $('.center').each(function() {
-        recenter($(this));
-        console.log($(this).parent());
-        $(this).parent().resize(function() {
-            console.log("RECENTER");
-            recenter($(this))
-        });
+    $(".imageset").resize(function() {
+        console.log("RESIZE");
+    });
+
+    $(".imageset").each(function(i) {
+        var $thumb = $(this).find(".thumb").last();
+        $thumb.click();
     });
 });

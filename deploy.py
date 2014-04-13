@@ -91,14 +91,13 @@ def deploy(specs=DEPLOYMENT_SPECIFIERS.keys(), files=[]):
     
     if 'dynamic' in specs:
 
-        pass
         # Run unit tests
         #print('Running unit testRunning unit tests')
         #subprocess.call([PROJECT_MANAGER, 'test'])
 
         # Restart supervisor
-        #print('Restarting supervisor process: %s' % SUPERVISOR_PROCESS)
-        #subprocess.call(['sudo', 'supervisorctl', 'restart', SUPERVISOR_PROCESS])
+        print('Restarting supervisor process: %s' % SUPERVISOR_PROCESS)
+        subprocess.call(['sudo', 'supervisorctl', 'restart', SUPERVISOR_PROCESS])
 
     #
     print('Finished deploying: %s' % BASE_DIR)
