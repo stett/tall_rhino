@@ -5,13 +5,22 @@
     <div class="image">
         <img />
         <span class="load"></span>
+        <div class="description"></div>
+        <div class="enlarge">Click To Enlarge</div>
     </div>
     <img class="buffer" />
     <div class="thumbs">
         {% for image in images %}
         {% thumbnail image.image '48x48' crop='center' as thumb %}
-        <img class="thumb" href="/media/{{ image.image }}" src="/media/{{ thumb }}"/>
+        <img class="thumb"
+             style="{% if images|length == 1 %}display: none{% endif %}"
+             href="/media/{{ image.image }}"
+             src="/media/{{ thumb }}"
+             data-description="{{ image.description }}" />
         {% endthumbnail %}
         {% endfor %}
+    </div>
+    <div class="fullscreen">
+        <img src="" />
     </div>
 </div>

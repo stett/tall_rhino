@@ -7,10 +7,10 @@
 // Colors
 @text_color: #444;
 @accent: #69f;
-@main_bg: rgb(200, 200, 200);
-//@main_bg: darken(@accent, 10%);
+@main_bg: rgb(220, 220, 220);
 @content_bg: rgb(240, 240, 240);
 @middle_gray: rgb(127, 127, 127);
+@light_gray: lighten(@middle_gray, 20%);
 
 // Fonts
 @main_font: 'Ubuntu', sans-serif;
@@ -23,9 +23,11 @@
 @content_width: 640px;
 @container_width: 600px;
 @header_height: 128px;
+@thumb_size: 40px;
 
 // Mixins
-.shadow { .box-shadow(0 0 4px -2px black); }
+.shadow { .box-shadow(0 0 6px -2px black); }
+.big-shadow { .box-shadow(0 0 16px -2px black); }
 
 
 /*
@@ -41,13 +43,15 @@ body {
     min-height: 90%;
     max-width: @content_width;
     margin: 0 auto;
-    margin-bottom: 32px;
     font-family: @main_font;
     color: @text_color;
     background-color: @content_bg;
-    border: 1px solid @accent;
-    border-top: none;
-    .shadow;
+    @media screen and (min-width: 660px) {
+        .shadow;
+        border: 1px solid @accent;
+        border-top: none;
+        margin-bottom: 32px;
+    }
 }
 
 #content {
@@ -97,7 +101,7 @@ body {
     li { list-style-type: none; }
     li a {
         display: block;
-        color: darken(@main_bg, 20%);
+        color: @light_gray;
         font-size: 12px;
         text-transform: uppercase;
         &:hover { color: @accent; }
@@ -126,6 +130,7 @@ h1, h2, h3, h4, h5, h6 {
  */
 
 .post {
+    padding: 10px 0;
     h2 {
         font-size: 13pt;
         font-weight: bold;
@@ -133,10 +138,24 @@ h1, h2, h3, h4, h5, h6 {
         line-height: 50%;
     }
     small {
-        color: darken(@main_bg, 25%);
+        color: @light_gray;
     }
     .content {
-        padding: 10px 0;
+        padding: 5px 0;
+    }
+    .controls {
+        float: right;
+        position: relative;
+        top: -@thumb_size;
+        text-align: right;
+        font-size: 12px;
+        a {
+            display: block;
+            color: @light_gray;
+            &:hover {
+                color: @accent;
+            }
+        }
     }
 }
 
@@ -162,49 +181,86 @@ h1, h2, h3, h4, h5, h6 {
 
         &:hover {
             cursor: pointer;
+            .enlarge { opacity: 1; }
         }
 
-        img {
-            position: absolute;
+        img { position: absolute; }
+
+        .load {
+            z-index: 4;
+            margin: 108px auto 0 auto;
         }
+    }
+
+    .description, .enlarge {
+        position: absolute;
+        z-index: 4;
+        margin: 5px;
+        padding: 5px;
+        line-height: 95%;
+        font-size: 12px;
+        background: rgba(255, 255, 255, .7);
+    }
+
+    .description { bottom: 0; }
+
+    .enlarge {
+        top: 0;
+        opacity: 0;
+        transition: opacity .2s;
     }
 
     .buffer {
         display: none;
         max-width: 100%;
-        max-height: @content_width;
+        @media screen and (max-height: @content_width) { max-height: @content_width; }
     }
 
-    .load {
-        z-index: 4;
-        margin: 32px auto;
-    }
-}
-.thumbs {
-    text-align: center;
-    height: 64px;
-}
-.thumb {
-    vertical-align: top;
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border: 1px solid @accent;
-    .shadow;
-    position: relative;
-    z-index: 1;
-    transition: margin-top .2s;
-
-    margin-top: -8px;
-
-    &:hover {
-        margin-top: -1px;
-        cursor: pointer;
+    .thumbs {
+        text-align: center;
+        height: @thumb_size;
     }
 
-    &.active {
-        margin-top: -3px;
-        z-index: 3;
+    .thumb {
+        vertical-align: top;
+        display: inline-block;
+        width: @thumb_size;
+        height: @thumb_size;
+        border: 1px solid @accent;
+        .shadow;
+        position: relative;
+        z-index: 1;
+        transition: margin-top .2s;
+
+        margin-top: -8px;
+
+        &:hover {
+            margin-top: -1px;
+            cursor: pointer;
+        }
+
+        &.active {
+            margin-top: -3px;
+            z-index: 3;
+        }
+    }
+
+    .fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .5);
+        display: none;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            .big-shadow;
+        }
     }
 }
 

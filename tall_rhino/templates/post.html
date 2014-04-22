@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-{% load imageset %}
 {% load staticfiles %}
+{% load imageset %}
+{% load comments %}
 
 {% block js %}
 <script type="text/javascript" src="{% static 'js/imageset.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-{% for post in posts %}
-<div class="post">
+<div id="post" class="post">
     <a id="{{ post.slug }}" href="{% url 'post' post.id %}#post"><h2>{{ post.title }}</h2></a>
     <small>{{ post.date }}</small>
 
@@ -17,10 +17,16 @@
         {% imageset post.images.all %}
     </div>
 
-    <div class="controls">
-        <a href="{% url 'post' post.id %}#comments">Comment</a>
-        <a href="{% url 'post' post.id %}#social">Social</a>
+    <div id="comments" class="comments">
+        <a href="{% url 'post' post.id %}#comments"><h2>Comments</h2></a>
+        {% comments post %}
+        <form>
+            <input type="text" />
+        </form>
+    </div>
+
+    <div id="social" class="social">
+        <a href="{% url 'post' post.id %}#social"><h2>Social</h2></a>
     </div>
 </div>
-{% endfor %}
 {% endblock %}

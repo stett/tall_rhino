@@ -7,24 +7,27 @@ from django.views.generic.detail import DetailView
 from django.core.paginator import Paginator
 class BlogView(ListView):
     model = Post
-    template_name = 'blog.html'
-    context_object_name = 'posts'
+    template_name = "blog.html"
+    context_object_name = "posts"
     paginate_by = 3
+class PostView(DetailView):
+    model = Post
+    template_name = "post.html"
+    context_object_name = "post"
+class EditBlogView(ListView):
+    model = Post
+    template_name = "edit-blog.html"
+    context_object_name = "posts"
+class EditPostView(DetailView):
+    model = Post
+    template_name = "edit-post.html"
+    context_object_name = "post"
 
 
-# APIs
+# API Views
 
-#from rest_framework.generics import ListAPIView
-#from .serializers import *
-#class PostsAPIView(ListAPIView):
-#    model = Post
-#    serializer_class = PostSerializer
-#    def get_queryset(self):
-#        queryset = self.model.objects.all()
-#        if 'newest' in self.kwargs:
-#            queryset = queryset.filter(date__le=self.kwargs['newest'])
-#        if 'oldest' in self.kwargs:
-#            queryset = queryset.filter(date__ge=self.kwargs['oldest'])
-#        return queryset
-
-
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+class ReadUpdateDeletePostAPIView(RetrieveUpdateDestroyAPIView):
+    model = Post
+class ListCreatePostAPIView(ListCreateAPIView):
+    model = Post

@@ -8,3 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     inlines = (PostImageInline, )
     prepopulated_fields = {"slug": ("title", )}
 admin.site.register(Post, PostAdmin)
+
+admin.site.register(PostImage)
+
+admin.site.register(PostComment)
