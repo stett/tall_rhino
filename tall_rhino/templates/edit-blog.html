@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+{% load compress %}
+
+{% block js %}
+{% compress js %}
+<script type="text/javascript" src="{% static 'js/edit-blog.js' %}"></script>
+{% endcompress %}
+{% endblock %}
+
 {% block content %}
 <ul>
     {% for post in posts %}
