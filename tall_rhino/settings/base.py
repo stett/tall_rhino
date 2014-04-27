@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Tall Rhino Core
     'blog',
@@ -39,6 +40,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'compressor',
     'sorl.thumbnail',
+    'disqus',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -162,3 +164,7 @@ COMPRESS_OFFLINE = True
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
+
+# Disqus settings
+DISQUS_API_KEY = 'HV7aw0Ex8nbmn7Fmfm2lLsWBHGCiVZKouMNaOvjfXbXzaZKnQqVeFf9ErPIwcWRq'
+DISQUS_WEBSITE_SHORTNAME = 'tallrhinoceros'

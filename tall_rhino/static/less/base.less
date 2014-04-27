@@ -108,6 +108,10 @@ body {
     }
 }
 
+#foot {
+    width: @content_width;
+}
+
 a {
     color: @accent;
     text-decoration: none;
@@ -122,6 +126,19 @@ em {
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
+}
+
+
+/*
+ * Pagination
+ */
+
+#pagination {
+    padding: 10px;
+    text-align: center;
+    strong {
+        color: @middle_gray;
+    }
 }
 
 
@@ -171,8 +188,8 @@ h1, h2, h3, h4, h5, h6 {
     .image {
         margin: 0 auto;
         display: block;
-        width: 256px;
-        height: 256px;
+        width: @content_width / 2;
+        height: @content_width / 2;
         position: relative;
         z-index: 2;
         border: 1px solid @accent;

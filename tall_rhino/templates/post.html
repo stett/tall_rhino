@@ -7,9 +7,14 @@
 <script type="text/javascript" src="{% static 'js/imageset.js' %}"></script>
 {% endblock %}
 
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
 {% block content %}
 <div id="post" class="post">
-    <a id="{{ post.slug }}" href="{% url 'post' post.id %}#post"><h2>{{ post.title }}</h2></a>
+
+    <a id="{{ post.slug }}" href="{{ post.get_absolute_url }}#post"><h2>{{ post.title }}</h2></a>
     <small>{{ post.date }}</small>
 
     <div class="content">
@@ -17,16 +22,9 @@
         {% imageset post.images.all %}
     </div>
 
-    <div id="comments" class="comments">
-        <a href="{% url 'post' post.id %}#comments"><h2>Comments</h2></a>
-        {% comments post %}
-        <form>
-            <input type="text" />
-        </form>
+    <div id="comments">
+        {% include 'comments.html' with post=post %}
     </div>
 
-    <div id="social" class="social">
-        <a href="{% url 'post' post.id %}#social"><h2>Social</h2></a>
-    </div>
 </div>
 {% endblock %}

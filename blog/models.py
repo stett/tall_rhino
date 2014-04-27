@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -10,6 +12,8 @@ class Post(models.Model):
         ordering = ['-date', ]
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return reverse('post', args=[self.id])
 
 class PostImage(models.Model):
     post = models.ForeignKey('Post', related_name='images')

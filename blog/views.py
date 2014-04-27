@@ -14,6 +14,10 @@ class PostView(DetailView):
     model = Post
     template_name = "post.html"
     context_object_name = "post"
+class CommentsView(DetailView):
+    model = Post
+    template_name = "comments_base.html"
+    context_object_name = "post"
 class EditBlogView(ListView):
     model = Post
     template_name = "edit-blog.html"

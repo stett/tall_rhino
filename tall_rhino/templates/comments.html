@@ -1,0 +1,8 @@
+{% load disqus_tags %}
+{% comment %}
+{% set_disqus_url post.get_absolute_url %}
+{% set_disqus_title post.title %}
+{% set_disqus_identifier post.slug %}
+{% endcomment %}
+{% set_disqus_title post.title %}
+{% disqus_show_comments %}

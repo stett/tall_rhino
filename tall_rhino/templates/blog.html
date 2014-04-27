@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load imageset %}
 {% load staticfiles %}
 
@@ -6,10 +7,14 @@
 <script type="text/javascript" src="{% static 'js/imageset.js' %}"></script>
 {% endblock %}
 
+{% block title %}
+Tall Rhinoceros
+{% endblock %}
+
 {% block content %}
 {% for post in posts %}
 <div class="post">
-    <a id="{{ post.slug }}" href="{% url 'post' post.id %}#post"><h2>{{ post.title }}</h2></a>
+    <a id="{{ post.slug }}" href="{{ post.get_absolute_url }}#post"><h2>{{ post.title }}</h2></a>
     <small>{{ post.date }}</small>
 
     <div class="content">
@@ -18,9 +23,23 @@
     </div>
 
     <div class="controls">
-        <a href="{% url 'post' post.id %}#comments">Comment</a>
-        <a href="{% url 'post' post.id %}#social">Social</a>
+        {#<a href="JavaScript:window.open('{% url 'comments' post.id %}', 'Comments', 'width=400,height=300');">Comment</a>#}
+        <a href="{{ post.get_absolute_url }}#comments">Comment</a>
     </div>
 </div>
 {% endfor %}
+{% endblock %}
+
+{% block foot %}
+{% if is_paginated %}
+<div id="pagination">
+    {% for page in paginator.page_range %}
+        {% ifequal page page_obj.number %}
+            <strong>{{ page }}</strong>
+        {% else %}
+            <a href="{% url 'home' %}?page={{ page }}">{{ page }}</a>
+        {% endifequal %}
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock %}

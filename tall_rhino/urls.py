@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-from blog.views import BlogView, PostView, EditBlogView, EditPostView
+from blog.views import BlogView, PostView, CommentsView, EditBlogView, EditPostView
 
 urlpatterns = patterns('',
 
@@ -13,6 +13,9 @@ urlpatterns = patterns('',
     # Blog posts
     url(r'^$', BlogView.as_view(), name='home'),
     url(r'^(?P<pk>[\d]+)/$', PostView.as_view(), name='post'),
+
+    # Comments
+    url(r'^comments/(?P<pk>[\d]+)/$', CommentsView.as_view(), name='comments'),
 
     # Post editing
     url(r'^edit/$', EditBlogView.as_view(), name='edit'),

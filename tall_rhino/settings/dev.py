@@ -9,6 +9,7 @@ COMPRESS_CSS_FILTERS = []
 COMPRESS_JS_FILTERS = []
 
 BASE_DOMAIN = 'http://dev.tallrhinoceros.com'
+SITE_ID = 4
 
 DATABASES = {
     'default': {
