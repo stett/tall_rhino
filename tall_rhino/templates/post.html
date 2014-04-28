@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+
 {% load staticfiles %}
 {% load imageset %}
 {% load comments %}
+{% load markdown %}
 
 {% block js %}
 <script type="text/javascript" src="{% static 'js/imageset.js' %}"></script>
@@ -18,7 +20,7 @@
     <small>{{ post.date }}</small>
 
     <div class="content">
-        {{ post.content }}
+        {{ post.content|markdown }}
         {% imageset post.images.all %}
     </div>
 

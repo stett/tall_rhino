@@ -3,7 +3,9 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-from blog.views import BlogView, PostView, CommentsView, EditBlogView, EditPostView
+#from blog.views import BlogView, PostView, CommentsView, EditBlogView, EditPostView
+from tall_rhino.views import BlogView, PostView, CommentsView, EditBlogView, EditPostView, AboutView
+from django.views.generic.base import RedirectView
 
 urlpatterns = patterns('',
 
@@ -13,13 +15,18 @@ urlpatterns = patterns('',
     # Blog posts
     url(r'^$', BlogView.as_view(), name='home'),
     url(r'^(?P<pk>[\d]+)/$', PostView.as_view(), name='post'),
+    url(r'^edit/$', EditBlogView.as_view(), name='edit'),
+    url(r'^edit/(?P<pk>[\d]+)/$', EditPostView.as_view(), name='edit'),
+
+    # Legacy posts
+    url(r'^blog/(?P<slug>[-\w\d]+)/$', 'tall_rhino.views.legacy_post_redirect', name='legacy-post'),
 
     # Comments
     url(r'^comments/(?P<pk>[\d]+)/$', CommentsView.as_view(), name='comments'),
 
-    # Post editing
-    url(r'^edit/$', EditBlogView.as_view(), name='edit'),
-    url(r'^edit/(?P<pk>[\d]+)/$', EditPostView.as_view(), name='edit'),
+    # Pages
+    url(r'^about/$', AboutView.as_view(), name='about'),
+    url(r'^archive/$', 'blog.views.archive_view', name='archive'),
 
     # API
     url(r'^api/', include('tall_rhino.api')),

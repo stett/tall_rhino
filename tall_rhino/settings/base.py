@@ -36,7 +36,6 @@ INSTALLED_APPS = (
 
     # Third Party
     'south',
-    #'braces',
     'rest_framework',
     'compressor',
     'sorl.thumbnail',

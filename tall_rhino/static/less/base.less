@@ -109,7 +109,7 @@ body {
 }
 
 #foot {
-    width: @content_width;
+    max-width: @content_width;
 }
 
 a {
@@ -136,8 +136,18 @@ h1, h2, h3, h4, h5, h6 {
 #pagination {
     padding: 10px;
     text-align: center;
+    a {
+        font-size: 12px;
+    }
     strong {
-        color: @middle_gray;
+        color: @content_bg;
+        background-color: @accent;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        line-height: 140%;
+        font-size: 14px;
     }
 }
 
@@ -152,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 13pt;
         font-weight: bold;
         text-transform: uppercase;
-        line-height: 50%;
+        margin-bottom: -6px;
     }
     small {
         color: @light_gray;
@@ -285,7 +295,6 @@ h1, h2, h3, h4, h5, h6 {
  * Loading spinner
  */
 
-
 @keyframes anim_spin {
     to { transform: rotate(1turn); }
 }
@@ -300,5 +309,59 @@ h1, h2, h3, h4, h5, h6 {
     @-webkit-keyframes spin {
         0%   {-webkit-transform: rotate(0deg)}
         100% {-webkit-transform: rotate(360deg)}
+    }
+}
+
+/*
+ * Page specific
+ */
+
+div.archive-year {
+    border-bottom: 1px solid @light_gray;
+    text-align: center;
+    span {
+        color: @light_gray;
+        background-color: @content_bg;
+        font-size: 12px;
+        padding: 6px;
+    }
+    height: 13px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+div.archive-block {
+    padding-left: 2.5%;
+}
+
+a.archive-thumb {
+    border: 1px solid @accent;
+    display: inline-block;
+    position: relative;
+    width: 48%;
+    height: 48px;
+    padding: 0;
+    margin-bottom: 2px;
+    line-height: 0;
+    background-color: white;
+    background-position: center;
+    span {
+        opacity: 0;
+        display: inline-block;
+        position: absolute;
+        margin: 5px;
+        padding: 5px;
+        line-height: 95%;
+        font-size: 12px;
+        background: rgba(255, 255, 255, .7);
+        bottom: 0;
+        color: @text_color;
+        transition: opacity .2s;
+    }
+    &:hover {
+        .shadow;
+        span {
+            opacity: 1;
+        }
     }
 }

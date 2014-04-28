@@ -1,32 +1,38 @@
+from django.http import Http404
 from .models import *
+
+# FBVs
+
+from django.shortcuts import render
+def archive_view(request):
+    posts = {}
+    for post in Post.objects.published():
+        if not post.date.year in posts:
+            posts[post.date.year] = [post, ]
+        else:
+            posts[post.date.year].append(post)
+    print Post.objects.published()
+    print posts
+    context = { "posts": posts }
+    return render(request, "archive.html", context)
 
 # CBVs
 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.core.paginator import Paginator
-class BlogView(ListView):
+class PostDetailView(DetailView):
     model = Post
-    template_name = "blog.html"
+    context_object_name = "post"
+    def get_object(self):
+        object = super(PostDetailView, self).get_object()
+        if not object.published: raise Http404
+        return object
+class PostListView(ListView):
+    model = Post
     context_object_name = "posts"
-    paginate_by = 3
-class PostView(DetailView):
-    model = Post
-    template_name = "post.html"
-    context_object_name = "post"
-class CommentsView(DetailView):
-    model = Post
-    template_name = "comments_base.html"
-    context_object_name = "post"
-class EditBlogView(ListView):
-    model = Post
-    template_name = "edit-blog.html"
-    context_object_name = "posts"
-class EditPostView(DetailView):
-    model = Post
-    template_name = "edit-post.html"
-    context_object_name = "post"
-
+    def get_queryset(self):
+        return Post.objects.published()
 
 # API Views
 

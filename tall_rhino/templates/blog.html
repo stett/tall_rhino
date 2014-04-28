@@ -2,6 +2,7 @@
 
 {% load imageset %}
 {% load staticfiles %}
+{% load markdown %}
 
 {% block js %}
 <script type="text/javascript" src="{% static 'js/imageset.js' %}"></script>
@@ -18,12 +19,11 @@ Tall Rhinoceros
     <small>{{ post.date }}</small>
 
     <div class="content">
-        {{ post.content }}
+        {{ post.content|markdown }}
         {% imageset post.images.all %}
     </div>
 
     <div class="controls">
-        {#<a href="JavaScript:window.open('{% url 'comments' post.id %}', 'Comments', 'width=400,height=300');">Comment</a>#}
         <a href="{{ post.get_absolute_url }}#comments">Comment</a>
     </div>
 </div>

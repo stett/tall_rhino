@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block title %}
+Archive
+{% endblock %}
+
+{% block content %}
+{% for year, year_posts in posts.iteritems reversed %}
+<div class="archive-year"><span>{{ year }}</span></div>
+<div class="archive-block">
+    {% for post in year_posts %}
+    {% for image in post.images.all %}
+    {% thumbnail image.image '315x48' crop='center' as thumb %}
+    <a class="archive-thumb" href="{{ post.get_absolute_url }}" style="background-image: url(/media/{{ thumb }});">
+        <span>{{ post }}</span>
+    </a>
+    {% endthumbnail %}
+    {% endfor %}
+    {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}
