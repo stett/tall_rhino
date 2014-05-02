@@ -20,7 +20,8 @@ LOG_FILE="$LOG_DIR/gunicorn.log"
 # Activate virtual environment
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
-# Create the run directory if it doesn't exist
+# Create the log directory if it doesn't exist
+echo "Testing log directory: $LOG_DIR"
 test -d $LOG_DIR || mkdir -p $LOG_DIR
 
 # Start the Gunicorn
