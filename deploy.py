@@ -34,6 +34,7 @@ IGNORED_FILES = [
     r'^.*\/env',
     r'^.*\/\.git',
     r'^.*\/CACHE\/.*$',
+    r'^\/media\/.*$',
 ]
 
 # If a changed file matches a regex corresponding to a

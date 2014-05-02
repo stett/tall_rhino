@@ -2,7 +2,7 @@ from django.views.generic import TemplateView
 from blog.views import PostDetailView, PostListView
 class BlogView(PostListView):
     template_name = "blog.html"
-    paginate_by = 3
+    paginate_by = 8
 class PostView(PostDetailView):
     template_name = "post.html"
 class CommentsView(PostDetailView):

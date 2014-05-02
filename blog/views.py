@@ -11,8 +11,6 @@ def archive_view(request):
             posts[post.date.year] = [post, ]
         else:
             posts[post.date.year].append(post)
-    print Post.objects.published()
-    print posts
     context = { "posts": posts }
     return render(request, "archive.html", context)
 

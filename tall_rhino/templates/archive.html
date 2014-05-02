@@ -12,10 +12,10 @@ Archive
 <div class="archive-year"><span>{{ year }}</span></div>
 <div class="archive-block">
     {% for post in year_posts %}
-    {% for image in post.images.all %}
+    {% for image in post.get_archive_images %}
     {% thumbnail image.image '315x48' crop='center' as thumb %}
     <a class="archive-thumb" href="{{ post.get_absolute_url }}" style="background-image: url(/media/{{ thumb }});">
-        <span>{{ post }}</span>
+        <span>{{ post.title }}</span>
     </a>
     {% endthumbnail %}
     {% endfor %}

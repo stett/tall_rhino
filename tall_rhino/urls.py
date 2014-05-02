@@ -20,6 +20,7 @@ urlpatterns = patterns('',
 
     # Legacy posts
     url(r'^blog/(?P<slug>[-\w\d]+)/$', 'tall_rhino.views.legacy_post_redirect', name='legacy-post'),
+    url(r'^post/(?P<slug>[-\w\d]+)/$', 'tall_rhino.views.legacy_post_redirect', name='legacy-post'),
 
     # Comments
     url(r'^comments/(?P<pk>[\d]+)/$', CommentsView.as_view(), name='comments'),

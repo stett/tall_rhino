@@ -20,7 +20,7 @@ $(function() {
             $img.height(height);
             $img.attr("src", src);
             $img.animate({ 'opacity': 1 }, 200, function() {
-                if ($description.text()) $description.fadeIn(200);
+                if ($description.text() && $description.text() != 'None') $description.fadeIn(200);
             });
             $loader.css({ 'margin-top': (height - $loader.height()) / 2});
         });
@@ -75,7 +75,6 @@ $(function() {
     });
 
     $(".imageset").resize(function() {
-        console.log("RESIZE");
     });
 
     $(".imageset").each(function(i) {

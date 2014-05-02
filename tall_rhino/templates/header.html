@@ -15,8 +15,10 @@
     <ul>
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'archive' %}">Archive</a></li>
+        {% comment %}
         {% if user.is_superuser %}
         <li><a href="{% url 'edit' %}">Edit</a></li>
         {% endif %}
+        {% endcomment %}
     </ul>
 </nav>

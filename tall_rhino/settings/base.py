@@ -33,6 +33,7 @@ INSTALLED_APPS = (
 
     # Tall Rhino Core
     'blog',
+    #'old_blog',
 
     # Third Party
     'south',

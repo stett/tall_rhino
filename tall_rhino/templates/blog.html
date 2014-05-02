@@ -17,6 +17,9 @@ Tall Rhinoceros
 <div class="post">
     <a id="{{ post.slug }}" href="{{ post.get_absolute_url }}#post"><h2>{{ post.title }}</h2></a>
     <small>{{ post.date }}</small>
+    {% if user.is_superuser %}
+    <div><a href="{% url 'admin:blog_post_change' post.id %}">admin</a></div>
+    {% endif %}
 
     <div class="content">
         {{ post.content|markdown }}
