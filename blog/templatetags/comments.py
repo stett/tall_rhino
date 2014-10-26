@@ -3,6 +3,7 @@ from blog.models import *
 
 register = template.Library()
 
+
 @register.inclusion_tag("comments.html")
 def comments(subject):
     comments = subject.comments.filter(published=True)

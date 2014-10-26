@@ -1,5 +1,5 @@
 #!/bin/bash
-
+unalias -a cd
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Base settings
