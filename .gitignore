@@ -23,3 +23,7 @@ secret.py
 # HTAccess user/password definitions #
 ######################################
 *.htpasswd
+
+# Databases #
+#############
+*.db
