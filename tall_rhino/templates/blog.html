@@ -14,8 +14,18 @@ Tall Rhinoceros
 
 {% block content %}
 {% for post in posts %}
-<div class="post">
-    <a id="{{ post.slug }}" href="{{ post.get_absolute_url }}#post"><h2>{{ post.title }}</h2></a>
+<div class="post {% if not post.published %}draft{% endif %}">
+
+    {% if not post.published %}
+    <form action="{% url 'api-publish' post.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="publish" href="#" value="Publish">
+    </form>
+    {% endif %}
+
+    <a id="{{ post.slug }}" href="{{ post.get_absolute_url }}#post">
+        <h2>{{ post.title }}</h2>
+    </a>
     <small>{{ post.date }}</small>
     {% if user.is_superuser %}
     <div><a href="{% url 'admin:blog_post_change' post.id %}">admin</a></div>

@@ -1,4 +1,6 @@
 from django.http import Http404
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404, redirect
 from .models import *
 
 # FBVs
@@ -39,12 +41,19 @@ class PostListView(ListView):
     context_object_name = "posts"
 
     def get_queryset(self):
-        return Post.objects.published()
+        if (self.request.GET.get('draft') is not None and
+            self.request.user.is_authenticated() and
+            self.request.user.is_superuser):
+            return Post.objects.all()
+        else:
+            return Post.objects.published()
 
 # API Views
 
+from rest_framework.views import APIView
 from rest_framework.generics import (
-    ListCreateAPIView, RetrieveUpdateDestroyAPIView)
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView)
 
 
 class ReadUpdateDeletePostAPIView(RetrieveUpdateDestroyAPIView):
@@ -53,3 +62,17 @@ class ReadUpdateDeletePostAPIView(RetrieveUpdateDestroyAPIView):
 
 class ListCreatePostAPIView(ListCreateAPIView):
     model = Post
+
+
+class PublishPostAPIView(APIView):
+
+    def post(self, request, pk):
+        if (not self.request.user.is_authenticated and
+                self.request.user.is_superuser):
+            raise PermissionDenied
+
+        post = get_object_or_404(Post, pk=pk)
+        post.published = True
+        post.save()
+
+        return redirect('post', pk=post.pk)

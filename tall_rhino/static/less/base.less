@@ -7,6 +7,7 @@
 // Colors
 @text_color: #444;
 @accent: #69f;
+@edit: #ff4d00;
 @main_bg: rgb(220, 220, 220);
 @content_bg: rgb(240, 240, 240);
 @middle_gray: rgb(127, 127, 127);
@@ -185,6 +186,24 @@ h1, h2, h3, h4, h5, h6 {
             color: @light_gray;
             &:hover {
                 color: @accent;
+            }
+        }
+    }
+
+    &.draft {
+        border: 2px dashed @edit;
+        padding: 10px;
+
+        .publish {
+            color: @edit;
+            font-weight: bold;
+            float: right;
+            border: 1px solid @edit;
+            border-radius: 3px;
+            padding: 3px;
+
+            &:hover {
+                color: lighten(@edit, 30%);
             }
         }
     }
