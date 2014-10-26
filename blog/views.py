@@ -30,6 +30,10 @@ class PostListView(ListView):
     model = Post
     context_object_name = "posts"
     def get_queryset(self):
+        #if self.request.user.is_authenticated:
+        #    return Post.objects.all()
+        #else:
+        #    return Post.objects.published()
         return Post.objects.published()
 
 # API Views
