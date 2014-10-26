@@ -10,10 +10,6 @@ REPOSITORY_ROOT = Path(__file__).ancestor(3)
 # Secret settings
 from .secret import *
 
-# Set the user model
-#AUTH_USER_MODEL = 'users.User'
-
-
 # Allowed host names... if blank, all are allowed. This should be
 # specified at least in prod.py if not in dev.py as well.
 ALLOWED_HOSTS = []

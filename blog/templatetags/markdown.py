@@ -6,6 +6,7 @@ import markdown2
 
 register = template.Library()
 
+
 @register.filter(is_safe=True)
 @stringfilter
 def markdown(value):
